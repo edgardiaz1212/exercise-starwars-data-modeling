@@ -16,6 +16,8 @@ class User(Base):
 class Favorites(Base):
     __tablename__='favorites'
     id=Column(Integer, primary_key=True)
+    id.character=
+    id.planets=
 
 
 class Character(Base):
@@ -27,7 +29,7 @@ class Character(Base):
     hair_color=(String(30))
     skin_color=(String(30))
     eye_color=(String(30))
-    birth_year=()
+    birth_year=(String(30))
     gender=Column(String(40))
     homeworld=Column(String(50))
     films=Column(String(60))
