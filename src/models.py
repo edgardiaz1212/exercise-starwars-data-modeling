@@ -22,6 +22,15 @@ class Favorites(Base):
     id.planets=Column(Integer, ForeignKey('planets.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
 
+favorites_characters = Table('favorites_characters', Base.metadata,
+    Column('favorite_id', Integer, ForeignKey('favorites.id')),
+    Column('character_id', Integer, ForeignKey('character.id'))
+)
+
+favorites_planets = Table('favorites_planets', Base.metadata,
+    Column('favorite_id', Integer, ForeignKey('favorites.id')),
+    Column('planet_id', Integer, ForeignKey('planets.id'))
+
 class Character(Base):
     __tablename__='character'
     id=Column(Integer, primary_key=True)
