@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Table
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy import create_engine
 from eralchemy2 import render_er
@@ -10,7 +10,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__='user'
     id=Column(Integer, primary_key=True)
-    name=Column(String(80), nullable=False)
+    email=Column(String(80), nullable=False)
     password=Column(String(100))
     created=Column(DateTime(timezone=False))
     favorites = relationship('Favorites')
@@ -29,7 +29,7 @@ favorites_characters = Table('favorites_characters', Base.metadata,
 
 favorites_planets = Table('favorites_planets', Base.metadata,
     Column('favorite_id', Integer, ForeignKey('favorites.id')),
-    Column('planet_id', Integer, ForeignKey('planets.id'))
+    Column('planet_id', Integer, ForeignKey('planets.id')))
 
 class Character(Base):
     __tablename__='character'
@@ -50,7 +50,7 @@ class Character(Base):
     starships=Column(String(60))
     created=Column(DateTime(timezone=False))
     edited=Column(DateTime(timezone=False))
-    url=Column(String(60))
+    url=Column(String(255))
 
 class Planets(Base):
     __tablename__='planets'
@@ -68,7 +68,7 @@ class Planets(Base):
     films=Column(String(100))
     created=Column(DateTime(timezone=False))
     edited=Column(DateTime(timezone=False))
-    url=Column(String(100))
+    url=Column(String(255))
 
 
 
