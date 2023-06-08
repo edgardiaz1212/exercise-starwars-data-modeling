@@ -13,13 +13,14 @@ class User(Base):
     name=Column(String(80), nullable=False)
     password=Column(String(100))
     created=Column(DateTime(timezone=False))
+    favorites = relationship('Favorites')
 
 class Favorites(Base):
     __tablename__='favorites'
     id=Column(Integer, primary_key=True)
     id.character=Column(Integer, ForeignKey('character.id'))
     id.planets=Column(Integer, ForeignKey('planets.id'))
-
+    user_id = Column(Integer, ForeignKey('user.id'))
 
 class Character(Base):
     __tablename__='character'
@@ -32,7 +33,8 @@ class Character(Base):
     eye_color=(String(30))
     birth_year=(String(30))
     gender=Column(String(40))
-    homeworld=Column(Integer, ForeignKey('planets.id'))
+    homeworld_id = Column(Integer, ForeignKey('planets.id'))
+    homeworld = relationship('Planets')
     films=Column(String(60))
     species=Column(String(60))
     vehicles=Column(String(60))
