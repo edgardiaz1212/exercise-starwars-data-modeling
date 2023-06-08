@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy import create_engine
 from eralchemy2 import render_er
@@ -11,13 +11,14 @@ class User(Base):
     __tablename__='user'
     id=Column(Integer, primary_key=True)
     name=Column(String(80), nullable=False)
-    created=Column(String(50))
+    password=Column(String(100))
+    created=Column(DateTime(timezone=False))
 
 class Favorites(Base):
     __tablename__='favorites'
     id=Column(Integer, primary_key=True)
-    id.character=
-    id.planets=
+    id.character=Column(Integer, ForeignKey('character.id'))
+    id.planets=Column(Integer, ForeignKey('planets.id'))
 
 
 class Character(Base):
@@ -31,13 +32,13 @@ class Character(Base):
     eye_color=(String(30))
     birth_year=(String(30))
     gender=Column(String(40))
-    homeworld=Column(String(50))
+    homeworld=Column(Integer, ForeignKey('planets.id'))
     films=Column(String(60))
     species=Column(String(60))
     vehicles=Column(String(60))
     starships=Column(String(60))
-    created=Column(String(60))
-    edited=Column(String(60))
+    created=Column(DateTime(timezone=False))
+    edited=Column(DateTime(timezone=False))
     url=Column(String(60))
 
 class Planets(Base):
@@ -54,8 +55,8 @@ class Planets(Base):
     population=Column(Integer)
     residents=Column(String(100))
     films=Column(String(100))
-    created=Column(String(100))
-    edited=Column(String(100))
+    created=Column(DateTime(timezone=False))
+    edited=Column(DateTime(timezone=False))
     url=Column(String(100))
 
 
